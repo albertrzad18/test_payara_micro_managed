@@ -6,7 +6,7 @@
 
 4.Trzeba zbudować na początku jara z profilem (tak jak w profilu bfp) i skopiować go do target, potem wskazać go w arquillian.xml.
 
-5.Podany jar musi byc jarem z payara micro, nie tym wygenerowanym z projektu (można się pozbyć custom JAR-ów, wszystko ładowane z POM-a?).
+5.Można się pozbyć custom jarow z profilu przy budowaniu jara???, wszystko ładowane z poma?.
 
 6.Od nowszych wersji Payara Micro Managed przy odpalaniu testów prop <arquillian.launch> nie jest konieczny, sam znajduje running container (ale w naszym case może lepiej i tak wskazać).
 </strong>
