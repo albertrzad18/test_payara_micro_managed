@@ -1,16 +1,7 @@
-<arquillian xmlns="http://jboss.org/schema/arquillian"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://jboss.org/schema/arquillian
-http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
-
-
+<arquillian xmlns="http://jboss.org/schema/arquillian">
     <container qualifier="payara-micro-managed" default="true">
         <configuration>
-            <property name="payaraMicroPath">${settings.localRepository}/fish/payara/extras/payara-micro/7.2025.1/payara-micro-7.2025.1.jar</property>
-            <property name="deploymentTimeout">60000</property>
-            <property name="javaVmArguments">-Xmx512m</property>
+            <property name="microJar">target/payara-micro.jar</property>
         </configuration>
     </container>
-
-
 </arquillian>

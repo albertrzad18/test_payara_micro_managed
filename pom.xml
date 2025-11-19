@@ -14,7 +14,6 @@
 
 
   <dependencies>
-    <!-- Payara Micro runtime for Arquillian -->
     <dependency>
       <groupId>fish.payara.extras</groupId>
       <artifactId>payara-micro</artifactId>
@@ -22,8 +21,6 @@
       <scope>test</scope>
     </dependency>
 
-
-    <!-- Arquillian JUnit 5 integration -->
     <dependency>
       <groupId>org.jboss.arquillian.junit5</groupId>
       <artifactId>arquillian-junit5-container</artifactId>
@@ -31,8 +28,6 @@
       <scope>test</scope>
     </dependency>
 
-
-    <!-- Payara Micro Managed Arquillian Adapter -->
     <dependency>
       <groupId>fish.payara.arquillian</groupId>
       <artifactId>arquillian-payara-micro-managed</artifactId>
@@ -40,8 +35,6 @@
       <scope>test</scope>
     </dependency>
 
-
-    <!-- APIs -->
     <dependency>
       <groupId>jakarta.enterprise</groupId>
       <artifactId>jakarta.enterprise.cdi-api</artifactId>
@@ -55,8 +48,6 @@
       <version>4.0.1</version>
     </dependency>
 
-
-    <!-- JUnit 5 -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -68,7 +59,31 @@
 
   <build>
     <plugins>
-      <!-- Use Failsafe for integration tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <id>copy-payara-micro</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>fish.payara.extras</groupId>
+                  <artifactId>payara-micro</artifactId>
+                  <version>7.2025.1</version>
+                  <outputDirectory>${project.build.directory}</outputDirectory>
+                  <destFileName>payara-micro.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -80,6 +95,9 @@
               <goal>verify</goal>
             </goals>
             <configuration>
+              <systemPropertyVariables>
+                <arquillian.launch>payara-micro-managed</arquillian.launch>
+              </systemPropertyVariables>
               <includes>
                 <include>**/*IT.java</include>
               </includes>
